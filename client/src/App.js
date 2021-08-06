@@ -12,10 +12,12 @@ import LoginForm from "./components/pages/LoginForm";
 import SignUpForm from "./components/pages/SignUpForm";
 import Home from "./components/pages/Home";
 import NavBar from "./components/NavBar";
+import Footer from "./components/Footer";
+import CocktailChoices from "./components/pages/CocktailChoices";
 
 // Construct our main GraphQL API endpoint
 const httpLink = createHttpLink({
-  uri: "/graphql",
+  uri: "http://localhost:3001/graphql",
 });
 
 // Construct request middleware that will attach the JWT token to every request as an `authorization` header
@@ -46,8 +48,10 @@ function App() {
           <Route exact path="/" component={Home} />
           <Route exact path="/login" component={LoginForm} />
           <Route exact path="/signup" component={SignUpForm} />
+          <Route exact path="/cocktails" component={CocktailChoices} />
         </>
       </Router>
+      <Footer />
     </ApolloProvider>
   );
 }

@@ -32,6 +32,14 @@ export default function NavBar() {
           as={Link}
           to="/signup"
         />
+        {Auth.loggedIn() ? (
+          <>
+            <Menu.Item as={Link} to="/cocktails"></Menu.Item>
+            <Menu.Item onClick={Auth.logout}>Logout</Menu.Item>
+          </>
+        ) : (
+          <Menu.Item onClick={Auth.logout}>Logout</Menu.Item>
+        )}
       </Menu.Menu>
     </Menu>
   );

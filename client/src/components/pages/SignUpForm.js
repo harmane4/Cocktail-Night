@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useMutation } from "@apollo/client";
-import { Button, Form } from "semantic-ui-react";
+import { Button, Form, Message } from "semantic-ui-react";
+import "./SignUpForm.css";
 
 import Auth from "../../utils/auth";
 import { ADD_USER } from "../../utils/mutations";
@@ -29,7 +30,6 @@ export default function SignUpForm() {
         variables: { ...userFormData },
       });
       Auth.login(data.addUser.token);
-      // props.history.push("/cocktails");
     } catch (err) {
       console.log(err);
     }
@@ -40,11 +40,10 @@ export default function SignUpForm() {
     });
   };
   return (
-    <div>
+    <div className="container">
       <h1>SIGN UP PAGE</h1>
       <Form onSubmit={handleFormSubmit} noValidate>
         <Form.Input>
-          <label>Name</label>
           <input
             type="text"
             placeholder="Name"
@@ -52,10 +51,10 @@ export default function SignUpForm() {
             value={userFormData.username}
             required
             name="username"
+            label="Name"
           />
         </Form.Input>
         <Form.Input>
-          <label>Email</label>
           <input
             type="email"
             placeholder="Email"
@@ -63,10 +62,10 @@ export default function SignUpForm() {
             value={userFormData.email}
             required
             name="email"
+            label="Email"
           />
         </Form.Input>
         <Form.Input>
-          <label>Password</label>
           <input
             type="password"
             placeholder="Password"
@@ -74,11 +73,12 @@ export default function SignUpForm() {
             value={userFormData.password}
             required
             name="password"
+            label="Password"
           />
         </Form.Input>
-
         <Button type="submit">Submit</Button>
       </Form>
+      <Message type="invalid"> Error with signup. Please try again</Message>
 
       <p>Log In here</p>
       <a></a>

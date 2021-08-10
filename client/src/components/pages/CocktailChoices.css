@@ -1,0 +1,30 @@
+.randomCocktailContainer {
+  font-size: 25px;
+  padding-left: 3%;
+  /* display: flex;
+  flex-direction: column; */
+}
+
+.heading {
+  font-size: 50px;
+  font-weight: 900;
+  color: white !important;
+}
+
+.image {
+  width: 600px;
+  height: 400px;
+  float: right;
+  padding-right: 3%;
+}
+
+p {
+  width: 50%;
+  color: white !important;
+}
+
+h2 {
+  font-size: 35px;
+  text-decoration: underline;
+  color: white !important;
+}

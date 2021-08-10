@@ -17,7 +17,7 @@ import CocktailChoices from "./components/pages/CocktailChoices";
 
 // Construct our main GraphQL API endpoint
 const httpLink = createHttpLink({
-  uri: "http://localhost:3001/graphql",
+  uri: "https://ancient-badlands-55523.herokuapp.com/",
 });
 
 const authLink = setContext((_, { headers }) => {

@@ -9,6 +9,7 @@ const resolvers = {
         const userData = await User.findOne({ _id: context.user._id });
         return userData;
       }
+      throw new AuthenticationError("You need to be logged in!");
     },
   },
   Mutation: {
@@ -40,59 +41,31 @@ const resolvers = {
     },
     saveCocktail: async (_, args, context) => {
       console.log("args", args);
+      const {
+        idDrink,
+        strDrink,
+        strIngredient1,
+        strIngredient2,
+        strIngredient3,
+        strIngredient4,
+        strMeasure1,
+        strMeasure2,
+        strMeasure3,
+        strMeasure4,
+        strInstructions,
+        strDrinkThumb,
+      } = args.cocktail;
+
       if (context.user) {
-        const updatedUser = await User.findByIdAndUpdate(
+        const updatedUser = await User.findOneAndUpdate(
           { _id: context.user._id },
-          {
-            cocktail: {
-              idDrink,
-              strDrink,
-              strIngredient1,
-              strIngredient2,
-              strIngredient3,
-              strIngredient4,
-              strMeasure1,
-              strMeasure2,
-              strMeasure3,
-              strMeasure4,
-              strInstructions,
-              strDrinkThumb,
-            },
-          },
+          { cocktail: args.cocktail },
           { new: true }
         );
         console.log("updatedUser", updatedUser);
         return updatedUser;
       }
-      throw new AuthenticationError("Error");
     },
-    // saveCocktail: async (_, args, context) => {
-    //   console.log("args", args);
-    //   if (context.user) {
-    //     const updatedUser = await User.findByIdAndUpdate(
-    //       { _id: context.user._id },
-    //       {
-    //         cocktail: {
-    //           idDrink,
-    //           strDrink,
-    //           strIngredient1,
-    //           strIngredient2,
-    //           strIngredient3,
-    //           strIngredient4,
-    //           strMeasure1,
-    //           strMeasure2,
-    //           strMeasure3,
-    //           strMeasure4,
-    //           strInstructions,
-    //           strDrinkThumb,
-    //         },
-    //       },
-    //       { new: true }
-    //     );
-    //   }
-    //   console.log("updatedUser", updatedUser);
-    //   return updatedUser;
-    // },
   },
 };
 

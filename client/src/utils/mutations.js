@@ -26,9 +26,6 @@ export const ADD_USER = gql`
 export const SAVE_COCKTAIL = gql`
   mutation saveCocktail($cocktail: CocktailInput!) {
     saveCocktail(cocktail: $cocktail) {
-      _id
-      username
-      email
       cocktail {
         idDrink
         strDrink

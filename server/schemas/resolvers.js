@@ -38,6 +38,61 @@ const resolvers = {
 
       return { token, user };
     },
+    saveCocktail: async (_, args, context) => {
+      console.log("args", args);
+      if (context.user) {
+        const updatedUser = await User.findByIdAndUpdate(
+          { _id: context.user._id },
+          {
+            cocktail: {
+              idDrink,
+              strDrink,
+              strIngredient1,
+              strIngredient2,
+              strIngredient3,
+              strIngredient4,
+              strMeasure1,
+              strMeasure2,
+              strMeasure3,
+              strMeasure4,
+              strInstructions,
+              strDrinkThumb,
+            },
+          },
+          { new: true }
+        );
+        console.log("updatedUser", updatedUser);
+        return updatedUser;
+      }
+      throw new AuthenticationError("Error");
+    },
+    // saveCocktail: async (_, args, context) => {
+    //   console.log("args", args);
+    //   if (context.user) {
+    //     const updatedUser = await User.findByIdAndUpdate(
+    //       { _id: context.user._id },
+    //       {
+    //         cocktail: {
+    //           idDrink,
+    //           strDrink,
+    //           strIngredient1,
+    //           strIngredient2,
+    //           strIngredient3,
+    //           strIngredient4,
+    //           strMeasure1,
+    //           strMeasure2,
+    //           strMeasure3,
+    //           strMeasure4,
+    //           strInstructions,
+    //           strDrinkThumb,
+    //         },
+    //       },
+    //       { new: true }
+    //     );
+    //   }
+    //   console.log("updatedUser", updatedUser);
+    //   return updatedUser;
+    // },
   },
 };
 

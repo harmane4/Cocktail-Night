@@ -3,6 +3,7 @@
   padding-left: 3%;
   /* display: flex;
   flex-direction: column; */
+  word-wrap: break-word;
 }
 
 .heading {
@@ -15,10 +16,12 @@
   width: 600px;
   height: 400px;
   float: right;
-  padding-right: 3%;
+  /* padding-right: 3%; */
+  border-radius: 25px;
+  margin-right: 3%;
 }
 
-p {
+.cocktailInfo {
   width: 50%;
   color: white !important;
 }
@@ -27,4 +30,74 @@ h2 {
   font-size: 35px;
   text-decoration: underline;
   color: white !important;
+}
+
+.saveCocktailButton {
+  float: right;
+  margin-right: 13%;
+  padding: 10px 25px;
+  font-weight: 500;
+  background: black;
+  outline: none !important;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: white !important;
+  border: 2px solid rgb(255, 255, 255);
+  z-index: 1;
+}
+
+.chooseAgainButton {
+  float: right;
+  margin-right: 11%;
+  padding: 10px 25px;
+  font-weight: 500;
+  background: black;
+  outline: none !important;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: white !important;
+  border: 2px solid rgb(255, 255, 255);
+  z-index: 1;
+  color: white;
+}
+
+.homePageButton {
+  position: relative;
+  display: inline-block;
+  padding: 30px 61px;
+  border-radius: 4px;
+  color: #03e9f4;
+  text-decoration: none;
+  text-transform: uppercase;
+  overflow: hidden;
+  margin: 25px;
+  font-family: "Roboto", sans-serif;
+  filter: hue-rotate(0deg);
+  border: 2px solid #d2bdff;
+  transition: all 0.1s linear;
+}
+
+@media screen and (max-width: 480px) {
+  .image {
+    width: 180px;
+    height: 180px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .randomCocktailContainer {
+    font-size: 2vh;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  h2 {
+    font-size: 3vh;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .heading {
+    font-size: 3vh;
+  }
 }

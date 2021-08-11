@@ -1,78 +1,136 @@
 import React, { useState, useEffect } from "react";
 import "./CocktailChoices.css";
-var convert = require("convert-units");
+import { SAVE_COCKTAIL } from "../../utils/mutations";
+import { useMutation } from "@apollo/client";
 
 export default function CocktailChoices() {
-  const [cocktails, setCocktail] = useState(null);
+  const [cocktail, setCocktail] = useState({
+    idDrink: "",
+    strDrink: "",
+    strIngredient1: "",
+    strIngredient2: "",
+    strIngredient3: "",
+    strIngredient4: "",
+    strMeasure1: "",
+    strMeasure2: "",
+    strMeasure3: "",
+    strMeasure4: "",
+    strInstructions: "",
+    strDrinkThumb: "",
+  });
   const [loading, setLoading] = useState(true);
-  console.log("cocktails", cocktails);
 
-  convert(1).from("fl-oz").to("ml");
+  const [saveCocktail, { data, error }] = useMutation(SAVE_COCKTAIL);
+
+  const handleButtonClick = async () => {
+    console.log("cocktail", cocktail);
+    try {
+      saveCocktail({ variables: cocktail });
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
   useEffect(() => {
     randomCocktail();
-
-    async function randomCocktail() {
-      const response = await fetch(
-        "https://www.thecocktaildb.com/api/json/v1/1/random.php"
-      );
-      const data = await response.json();
-      const cocktailData = data.drinks[0];
-      console.log("cocktailData", cocktailData);
-
-      setCocktail(cocktailData);
-      setLoading(false);
-    }
   }, []);
+
+  async function randomCocktail() {
+    const response = await fetch(
+      "https://www.thecocktaildb.com/api/json/v1/1/random.php"
+    );
+    const data = await response.json();
+    const {
+      idDrink,
+      strDrink,
+      strIngredient1,
+      strIngredient2,
+      strIngredient3,
+      strIngredient4,
+      strMeasure1,
+      strMeasure2,
+      strMeasure3,
+      strMeasure4,
+      strInstructions,
+      strDrinkThumb,
+    } = data.drinks[0];
+    // I want all of this cocktailData (cocktails) saved to my saveCocktail mutation. Which will then update the user.
+
+    setCocktail({
+      idDrink,
+      strDrink,
+      strIngredient1,
+      strIngredient2,
+      strIngredient3,
+      strIngredient4,
+      strMeasure1,
+      strMeasure2,
+      strMeasure3,
+      strMeasure4,
+      strInstructions,
+      strDrinkThumb,
+    });
+    setLoading(false);
+  }
 
   return (
     <div className="randomCocktailContainer">
+      <button onClick={randomCocktail} className="chooseAgainButton">
+        Bartender's Choice
+      </button>
       <h1 className="heading">YOUR COCKTAIL</h1>
-      <h2>COCKTAIL NAME</h2>
+
+      <button onClick={handleButtonClick} className="saveCocktailButton">
+        Save Cocktail
+      </button>
+
+      {/* <button className="saveCocktailButton">Save Cocktail</button> */}
+      <h2>COCKTAIL</h2>
       {loading ? (
         <div>...loading</div>
       ) : (
-        <img className="image" src={cocktails.strDrinkThumb}></img>
+        <img
+          className="image"
+          src={cocktail.strDrinkThumb}
+          alt={cocktail.strDrink}
+        ></img>
       )}
-      {loading ? <div>..loading</div> : <p>{cocktails.strDrink}</p>}
+      {loading ? <div>..loading</div> : <p>{cocktail.strDrink}</p>}
       <h2>INGREDIENTS & MEASUREMENTS</h2>
       {loading ? (
         <div>..loading</div>
       ) : (
-        <p>
-          {cocktails.strIngredient1} - {cocktails.strMeasure1}
+        <p className="cocktailInfo">
+          {cocktail.strIngredient1} - {cocktail.strMeasure1}
         </p>
       )}
       {loading ? (
         <div>..loading</div>
       ) : (
-        <p>
-          {cocktails.strIngredient2} - {cocktails.strMeasure2}
+        <p className="cocktailInfo">
+          {cocktail.strIngredient2} - {cocktail.strMeasure2}
         </p>
       )}
       {loading ? (
         <div>..loading</div>
       ) : (
-        <p>
-          {cocktails.strIngredient3} - {cocktails.strMeasure3}
+        <p className="cocktailInfo">
+          {cocktail.strIngredient3} - {cocktail.strMeasure3}
         </p>
       )}
       {loading ? (
         <div>..loading</div>
       ) : (
-        <p>
-          {cocktails.strIngredient4} - {cocktails.strMeasure4}
+        <p className="cocktailInfo">
+          {cocktail.strIngredient4} - {cocktail.strMeasure4}
         </p>
       )}
       <h2>METHOD</h2>
-      {loading ? <div>..loading</div> : <p>{cocktails.strInstructions}</p>}
+      {loading ? (
+        <div>..loading</div>
+      ) : (
+        <p className="cocktailInfo">{cocktail.strInstructions}</p>
+      )}
     </div>
   );
-}
-
-{
-  /* <li>Cocktail Name: {cocktail.drinks[0].strDrink} </li>
-        <li>Ingredients: </li>
-        <li>Method:</li>
-        <li>Image:</li> */
 }

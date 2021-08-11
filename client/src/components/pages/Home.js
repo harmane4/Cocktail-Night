@@ -3,6 +3,8 @@ import "./Home.css";
 import cocktail1 from "../../assets/images/cocktail111.jpg";
 import cocktail2 from "../../assets/images/cocktail222.jpg";
 import cocktail3 from "../../assets/images/cocktail333.jpg";
+import { Link } from "react-router-dom";
+import Auth from "../../utils/auth";
 
 export default function Home() {
   return (
@@ -17,9 +19,25 @@ export default function Home() {
       <div className="column">
         <img className="img" src={cocktail3} alt="cocktail"></img>
       </div>
-
       <h1 className="heroHeading">#COCKTAIL NIGHT</h1>
-      <p className="heroText">Lorem epsum epsum epsum epsum epsum epsum</p>
+      <div className="textContainer">
+        <h3 className="subHeading">
+          Cocktail recipes at the click of a{" "}
+          {Auth.loggedIn() ? (
+            <Link to="/cocktails">
+              <button className="btn41-43 btn-43">BUTTON</button>
+            </Link>
+          ) : (
+            <div>
+              <Link to="/signup">
+                <button className="btn41-43 btn-43">BUTTON</button>
+              </Link>
+
+              <p className="heroText">Login or Signup to get started</p>
+            </div>
+          )}
+        </h3>
+      </div>
     </div>
   );
 }

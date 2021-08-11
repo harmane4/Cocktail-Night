@@ -22,3 +22,27 @@ export const ADD_USER = gql`
     }
   }
 `;
+
+export const SAVE_COCKTAIL = gql`
+  mutation saveCocktail($cocktail: CocktailInput!) {
+    saveCocktail(cocktail: $cocktail) {
+      _id
+      username
+      email
+      cocktail {
+        idDrink
+        strDrink
+        strIngredient1
+        strIngredient2
+        strIngredient3
+        strIngredient4
+        strMeasure1
+        strMeasure2
+        strMeasure3
+        strMeasure4
+        strInstructions
+        strDrinkThumb
+      }
+    }
+  }
+`;

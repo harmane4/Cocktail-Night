@@ -16,7 +16,7 @@ export default function SignUpForm() {
     password: "",
   });
 
-  const [addUser, { error }] = useMutation(ADD_USER);
+  const [addUser] = useMutation(ADD_USER);
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -41,47 +41,53 @@ export default function SignUpForm() {
   };
   return (
     <div className="container">
-      <h1>SIGN UP PAGE</h1>
+      <h1>SIGN UP </h1>
       <Form onSubmit={handleFormSubmit} noValidate>
-        <Form.Input>
-          <input
-            type="text"
-            placeholder="Name"
-            onChange={handleInputChange}
-            value={userFormData.username}
-            required
-            name="username"
-            label="Name"
-          />
-        </Form.Input>
-        <Form.Input>
-          <input
-            type="email"
-            placeholder="Email"
-            onChange={handleInputChange}
-            value={userFormData.email}
-            required
-            name="email"
-            label="Email"
-          />
-        </Form.Input>
-        <Form.Input>
-          <input
-            type="password"
-            placeholder="Password"
-            onChange={handleInputChange}
-            value={userFormData.password}
-            required
-            name="password"
-            label="Password"
-          />
-        </Form.Input>
-        <Button type="submit">Submit</Button>
-      </Form>
-      <Message type="invalid"> Error with signup. Please try again</Message>
+        <Form.Field>
+          <label>Name</label>
+          <Form.Input>
+            <input
+              type="text"
+              placeholder="Name"
+              onChange={handleInputChange}
+              value={userFormData.username}
+              required
+              name="username"
+            />
+          </Form.Input>
+        </Form.Field>
+        <Form.Field>
+          <label>Email</label>
+          <Form.Input>
+            <input
+              type="email"
+              placeholder="Email"
+              onChange={handleInputChange}
+              value={userFormData.email}
+              required
+              name="email"
+            />
+          </Form.Input>
+        </Form.Field>
+        <Form.Field>
+          <label>Password</label>
+          <Form.Input>
+            <input
+              type="password"
+              placeholder="Password"
+              onChange={handleInputChange}
+              value={userFormData.password}
+              required
+              name="password"
+            />
+          </Form.Input>
+        </Form.Field>
 
-      <p>Log In here</p>
-      <a></a>
+        <button className="btn41-43 btn-43" type="submit">
+          Submit
+        </button>
+      </Form>
+      {/* <Message type="invalid"> Error with signup. Please try again</Message> */}
     </div>
   );
 }

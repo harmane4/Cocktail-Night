@@ -21,11 +21,18 @@ export default function NavBar() {
               to="/"
             />
             <Menu.Item
-              name="cocktails"
-              active={activeItem === "cocktails"}
+              name="choose cocktail"
+              active={activeItem === "choose cocktail"}
               onClick={handleItemClick}
               as={Link}
               to="/cocktails"
+            />
+            <Menu.Item
+              name="view saved cocktail"
+              active={activeItem === "view saved cocktail"}
+              onClick={handleItemClick}
+              as={Link}
+              to="/saved"
             />
             <Menu.Item onClick={Auth.logout}>
               <Link to="/">Logout</Link>

@@ -14,6 +14,7 @@ import Home from "./components/pages/Home";
 import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
 import CocktailChoices from "./components/pages/CocktailChoices";
+import SavedCocktail from "./components/pages/SavedCocktail";
 require("dotenv").config();
 
 // Construct our main GraphQL API endpoint
@@ -47,6 +48,7 @@ function App() {
           <Route exact path="/login" component={LoginForm} />
           <Route exact path="/signup" component={SignUpForm} />
           <Route exact path="/cocktails" component={CocktailChoices} />
+          <Route exact path="/saved" component={SavedCocktail} />
         </>
       </Router>
       <Footer />

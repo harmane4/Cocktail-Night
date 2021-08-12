@@ -15,7 +15,7 @@ export default function LoginForm() {
     password: "",
   });
 
-  const [loginUser, { error }] = useMutation(LOGIN_USER);
+  const [loginUser] = useMutation(LOGIN_USER);
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -46,32 +46,37 @@ export default function LoginForm() {
     <div className="loginContainer">
       <h1>LOG IN</h1>
       <Form onSubmit={handleFormSubmit} noValidate>
-        <Form.Input>
-          <input
-            type="email"
-            placeholder="Email"
-            onChange={handleInputChange}
-            value={userFormData.email}
-            required
-            name="email"
-          />
-        </Form.Input>
-        <Form.Input>
-          <input
-            type="password"
-            placeholder="Password"
-            onChange={handleInputChange}
-            value={userFormData.password}
-            required
-            name="password"
-          />
-        </Form.Input>
+        <Form.Field>
+          <label>Email</label>
+          <Form.Input>
+            <input
+              type="email"
+              placeholder="Email"
+              onChange={handleInputChange}
+              value={userFormData.email}
+              required
+              name="email"
+            />
+          </Form.Input>
+        </Form.Field>
+        <Form.Field>
+          <label>Password</label>
+          <Form.Input>
+            <input
+              type="password"
+              placeholder="Password"
+              onChange={handleInputChange}
+              value={userFormData.password}
+              required
+              name="password"
+            />
+          </Form.Input>
+        </Form.Field>
 
-        <Button type="submit">Log In</Button>
+        <button className="btn41-43 btn-43" type="submit">
+          Log In
+        </button>
       </Form>
-
-      <p>Sign In Here</p>
-      <a></a>
     </div>
   );
 }

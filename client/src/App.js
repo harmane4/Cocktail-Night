@@ -14,6 +14,7 @@ import Home from "./components/pages/Home";
 import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
 import CocktailChoices from "./components/pages/CocktailChoices";
+require("dotenv").config();
 
 // Construct our main GraphQL API endpoint
 const httpLink = createHttpLink({

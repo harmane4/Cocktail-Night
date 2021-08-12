@@ -1,5 +1,6 @@
 const { Schema, model } = require("mongoose");
 const bcrypt = require("bcrypt");
+const cocktailSchema = require("./Cocktail");
 
 const userSchema = new Schema(
   {
@@ -18,6 +19,8 @@ const userSchema = new Schema(
       type: String,
       required: true,
     },
+
+    cocktail: cocktailSchema,
   },
   {
     toJSON: {

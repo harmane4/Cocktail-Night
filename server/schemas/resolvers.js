@@ -9,6 +9,7 @@ const resolvers = {
         const userData = await User.findOne({ _id: context.user._id });
         return userData;
       }
+      throw new AuthenticationError("You need to be logged in!");
     },
   },
   Mutation: {
@@ -37,6 +38,34 @@ const resolvers = {
       const token = signToken(user);
 
       return { token, user };
+    },
+    saveCocktail: async (_, args, context) => {
+      console.log("args", args);
+      const {
+        idDrink,
+        strDrink,
+        strIngredient1,
+        strIngredient2,
+        strIngredient3,
+        strIngredient4,
+        strMeasure1,
+        strMeasure2,
+        strMeasure3,
+        strMeasure4,
+        strInstructions,
+        strDrinkThumb,
+      } = args.cocktail;
+
+      if (context.user) {
+        const updatedUser = await User.findOneAndUpdate(
+          { _id: context.user._id },
+          { cocktail: args.cocktail },
+          { new: true }
+        );
+        console.log("updatedUser", updatedUser);
+        console.log("args.cocktail", args.cocktail);
+        return updatedUser;
+      }
     },
   },
 };

@@ -27,7 +27,9 @@ export default function NavBar() {
               as={Link}
               to="/cocktails"
             />
-            <Menu.Item onClick={Auth.logout}>Logout</Menu.Item>
+            <Menu.Item onClick={Auth.logout}>
+              <Link to="/">Logout</Link>
+            </Menu.Item>
           </>
         ) : (
           <>
@@ -52,39 +54,4 @@ export default function NavBar() {
       </div>
     </Menu>
   );
-
-  // return (
-  //   <Menu tabular>
-  //     <Menu.Item
-  //       name="home"
-  //       active={activeItem === "home"}
-  //       onClick={handleItemClick}
-  //       as={Link}
-  //       to="/"
-  //     />
-  //     <Menu.Item
-  //       name="cocktails"
-  //       active={activeItem === "cocktails"}
-  //       onClick={handleItemClick}
-  //       as={Link}
-  //       to="/cocktails"
-  //     />
-  //     <Menu.Menu position="right">
-  //       <Menu.Item
-  //         name="login"
-  //         active={activeItem === "login"}
-  //         onClick={handleItemClick}
-  //         as={Link}
-  //         to="/login"
-  //       />
-  //       <Menu.Item
-  //         name="signup"
-  //         active={activeItem === "signup"}
-  //         onClick={handleItemClick}
-  //         as={Link}
-  //         to="/signup"
-  //       />
-  //     </Menu.Menu>
-  //   </Menu>
-  // );
 }

@@ -63,6 +63,7 @@ const resolvers = {
           { new: true }
         );
         console.log("updatedUser", updatedUser);
+        console.log("args.cocktail", args.cocktail);
         return updatedUser;
       }
     },

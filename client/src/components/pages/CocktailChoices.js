@@ -25,7 +25,9 @@ export default function CocktailChoices() {
   const handleButtonClick = async () => {
     console.log("cocktail", cocktail);
     try {
-      saveCocktail({ variables: cocktail });
+      await saveCocktail({
+        variables: { cocktail },
+      });
     } catch (err) {
       console.error(err);
     }

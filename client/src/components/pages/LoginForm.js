@@ -1,12 +1,10 @@
 import React, { useState } from "react";
 import { useMutation } from "@apollo/client";
-import { Button, Form } from "semantic-ui-react";
+import { Form, Message } from "semantic-ui-react";
 import "./LoginForm.css";
 
 import Auth from "../../utils/auth";
 import { LOGIN_USER } from "../../utils/mutations";
-
-// TODO: Error handling
 
 export default function LoginForm() {
   // set initial form state
@@ -15,13 +13,16 @@ export default function LoginForm() {
     password: "",
   });
 
-  const [loginUser] = useMutation(LOGIN_USER);
+  // Mutation to login a user
+  const [loginUser, { loading, error }] = useMutation(LOGIN_USER);
 
+  // Handles input change in the log in form
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setUserFormData({ ...userFormData, [name]: value });
   };
 
+  // Handles the submit in the log in form
   const handleFormSubmit = async (event) => {
     event.preventDefault();
     try {
@@ -36,8 +37,8 @@ export default function LoginForm() {
     } catch (err) {
       console.error(err);
     }
+    // Clears form
     setUserFormData({
-      username: "",
       email: "",
       password: "",
     });
@@ -45,7 +46,11 @@ export default function LoginForm() {
   return (
     <div className="loginContainer">
       <h1>LOG IN</h1>
-      <Form onSubmit={handleFormSubmit} noValidate>
+      <Form
+        onSubmit={handleFormSubmit}
+        noValidate
+        className={loading ? "loading" : ""}
+      >
         <Form.Field>
           <label>Email</label>
           <Form.Input>
@@ -76,6 +81,8 @@ export default function LoginForm() {
         <button className="btn41-43 btn-43" type="submit">
           Log In
         </button>
+
+        {error && <Message>Login unsuccessful</Message>}
       </Form>
     </div>
   );

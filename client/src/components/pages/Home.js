@@ -1,8 +1,8 @@
 import React from "react";
 import "./Home.css";
-import cocktail1 from "../../assets/images/cocktail111.jpg";
-import cocktail2 from "../../assets/images/cocktail222.jpg";
-import cocktail3 from "../../assets/images/cocktail333.jpg";
+import cocktail1 from "../../assets/images/cocktail1.jpg";
+import cocktail2 from "../../assets/images/cocktail2.jpg";
+import cocktail3 from "../../assets/images/cocktail3.jpg";
 import { Link } from "react-router-dom";
 import Auth from "../../utils/auth";
 

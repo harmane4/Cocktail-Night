@@ -1,12 +1,10 @@
 import React, { useState } from "react";
 import { useMutation } from "@apollo/client";
-import { Button, Form, Message } from "semantic-ui-react";
+import { Form, Message } from "semantic-ui-react";
 import "./SignUpForm.css";
 
 import Auth from "../../utils/auth";
 import { ADD_USER } from "../../utils/mutations";
-
-// TODO: Error handling
 
 export default function SignUpForm() {
   // set initial form state
@@ -16,13 +14,16 @@ export default function SignUpForm() {
     password: "",
   });
 
-  const [addUser] = useMutation(ADD_USER);
+  // Mutation to add a user
+  const [addUser, { loading, error }] = useMutation(ADD_USER);
 
+  // Handles input change in the sign up form
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setUserFormData({ ...userFormData, [name]: value });
   };
 
+  // Handles the submit in the sign up form
   const handleFormSubmit = async (event) => {
     event.preventDefault();
     try {
@@ -33,16 +34,29 @@ export default function SignUpForm() {
     } catch (err) {
       console.log(err);
     }
+    // Clears form
     setUserFormData({
       username: "",
       email: "",
       password: "",
     });
   };
+
+  // TODO: Error handling
+  const [formErrorMessage, setFormErrorMessage] = useState(false);
+
+  function errorMessageDisplay() {}
+
   return (
-    <div className="container">
+    <div id="container">
       <h1>SIGN UP </h1>
-      <Form onSubmit={handleFormSubmit} noValidate>
+      <Form
+        onSubmit={handleFormSubmit}
+        noValidate
+        // When form is loading display loading text
+        className={loading ? "loading" : ""}
+        error
+      >
         <Form.Field>
           <label>Name</label>
           <Form.Input>
@@ -86,8 +100,8 @@ export default function SignUpForm() {
         <button className="btn41-43 btn-43" type="submit">
           Submit
         </button>
+        {error && <Message>Sign up not successful, please try again</Message>}
       </Form>
-      {/* <Message type="invalid"> Error with signup. Please try again</Message> */}
     </div>
   );
 }

@@ -1,8 +1,10 @@
+/* Login form container*/
 .loginContainer {
   width: 600px;
   margin: auto;
 }
 
+/* Button styling */
 .btn41-43 {
   padding: 10px 25px;
   font-weight: 500;
@@ -19,4 +21,12 @@
   border: 2px solid rgb(255, 255, 255);
   z-index: 1;
   color: white;
+}
+
+/* Media Queries */
+@media screen and (max-width: 480px) {
+  .loginContainer {
+    width: 250px;
+    height: 180px;
+  }
 }

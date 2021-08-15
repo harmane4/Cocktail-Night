@@ -1,21 +1,18 @@
 import React from "react";
 import { GET_ME } from "../../utils/queries";
-import { useQuery } from "@apollo/client";
+import { REMOVE_COCKTAIL } from "../../utils/mutations";
+import { useMutation, useQuery } from "@apollo/client";
 
 export default function SavedCocktail() {
+  // Query to get user data
   const { loading, data } = useQuery(GET_ME);
 
-  console.log(data);
+  // const [deleteCocktail, { error }] = useMutation(REMOVE_COCKTAIL);
 
-  const userData = data?.userData || [];
-
-  console.log(userData);
-
+  // Message when page is loading API data
   if (loading) {
     return <h2>Loading cocktail</h2>;
   }
-
-  console.log(userData);
 
   const drink = data.me.cocktail.strDrink;
   const ingredient1 = data.me.cocktail.strIngredient1;
@@ -28,9 +25,24 @@ export default function SavedCocktail() {
   const quantity4 = data.me.cocktail.strMeasure4;
   const instructions = data.me.cocktail.strInstructions;
   const drinkImage = data.me.cocktail.strDrinkThumb;
+  const drinkId = data.me.cocktail.idDrink;
+
+  // TODO: Delete cocktail function
+  // const handleDeleteCocktail = async () => {
+  //   try {
+  //     const { data } = await deleteCocktail({
+  //       variables: drinkId,
+  //     });
+  //   } catch (err) {
+  //     console.error(err);
+  //   }
+  // };
 
   return (
     <div className="randomCocktailContainer">
+      {/* <button onClick={handleDeleteCocktail} className="buttonStyle">
+        Delete cocktail
+      </button> */}
       {loading ? (
         <p>Loading Cocktail</p>
       ) : (
@@ -39,18 +51,18 @@ export default function SavedCocktail() {
           <img className="image" src={drinkImage} alt={drink}></img>
           <h2>COCKTAIL</h2>
           <p className="cocktailInfo">{drink}</p>
-          <h2>INGREDIENTS & MEASUREMENTS</h2>
+          <h2>INGREDIENTS</h2>
           <p className="cocktailInfo">
-            {ingredient1} - {quantity1}
+            {ingredient1} {quantity1}
           </p>
           <p className="cocktailInfo">
-            {ingredient2} - {quantity2}
+            {ingredient2} {quantity2}
           </p>
           <p className="cocktailInfo">
-            {ingredient3} - {quantity3}
+            {ingredient3} {quantity3}
           </p>
           <p className="cocktailInfo">
-            {ingredient4} - {quantity4}
+            {ingredient4} {quantity4}
           </p>
 
           <p className="cocktailInfo">{instructions}</p>

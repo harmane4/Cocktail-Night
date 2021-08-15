@@ -18,12 +18,14 @@ export default function CocktailChoices() {
     strInstructions: "",
     strDrinkThumb: "",
   });
+  // Setting state for loading
   const [loading, setLoading] = useState(true);
-
-  const [saveCocktail, { data, error }] = useMutation(SAVE_COCKTAIL);
+  // Mutation to save a cocktail to a user
+  const [saveCocktail] = useMutation(SAVE_COCKTAIL);
+  // Setting state for the save cocktail submit button
+  const [submitButtonMessage, setSubmitButtonMessage] = useState(false);
 
   const handleButtonClick = async () => {
-    console.log("cocktail", cocktail);
     try {
       await saveCocktail({
         variables: { cocktail },
@@ -31,13 +33,20 @@ export default function CocktailChoices() {
     } catch (err) {
       console.error(err);
     }
+    successMessage();
   };
+  // Function to show a message when the save cocktail button is clicked
+  function successMessage() {
+    setSubmitButtonMessage("Cocktail Saved!");
+  }
 
   useEffect(() => {
     randomCocktail();
   }, []);
 
+  // Function that generates a random cocktail from an API call
   async function randomCocktail() {
+    setSubmitButtonMessage(false);
     const response = await fetch(
       "https://www.thecocktaildb.com/api/json/v1/1/random.php"
     );
@@ -56,7 +65,6 @@ export default function CocktailChoices() {
       strInstructions,
       strDrinkThumb,
     } = data.drinks[0];
-    // I want all of this cocktailData (cocktails) saved to my saveCocktail mutation. Which will then update the user.
 
     setCocktail({
       idDrink,
@@ -77,17 +85,23 @@ export default function CocktailChoices() {
 
   return (
     <div className="randomCocktailContainer">
-      <button onClick={randomCocktail} className="chooseAgainButton">
+      <button onClick={randomCocktail} className="buttonStyle">
         Bartender's Choice
       </button>
+
       <h1 className="heading">YOUR COCKTAIL</h1>
 
       <button onClick={handleButtonClick} className="saveCocktailButton">
         Save Cocktail
       </button>
 
-      {/* <button className="saveCocktailButton">Save Cocktail</button> */}
       <h2>COCKTAIL</h2>
+      <p className="submitButtonMessage">{submitButtonMessage}</p>
+      {loading ? (
+        <div>..loading</div>
+      ) : (
+        <p className="cocktailInfo">{cocktail.strDrink}</p>
+      )}
       {loading ? (
         <div>...loading</div>
       ) : (
@@ -97,34 +111,33 @@ export default function CocktailChoices() {
           alt={cocktail.strDrink}
         ></img>
       )}
-      {loading ? <div>..loading</div> : <p>{cocktail.strDrink}</p>}
-      <h2>INGREDIENTS & MEASUREMENTS</h2>
+      <h2>INGREDIENTS </h2>
       {loading ? (
         <div>..loading</div>
       ) : (
         <p className="cocktailInfo">
-          {cocktail.strIngredient1} - {cocktail.strMeasure1}
+          {cocktail.strIngredient1} {cocktail.strMeasure1}
         </p>
       )}
       {loading ? (
         <div>..loading</div>
       ) : (
         <p className="cocktailInfo">
-          {cocktail.strIngredient2} - {cocktail.strMeasure2}
+          {cocktail.strIngredient2} {cocktail.strMeasure2}
         </p>
       )}
       {loading ? (
         <div>..loading</div>
       ) : (
         <p className="cocktailInfo">
-          {cocktail.strIngredient3} - {cocktail.strMeasure3}
+          {cocktail.strIngredient3} {cocktail.strMeasure3}
         </p>
       )}
       {loading ? (
         <div>..loading</div>
       ) : (
         <p className="cocktailInfo">
-          {cocktail.strIngredient4} - {cocktail.strMeasure4}
+          {cocktail.strIngredient4} {cocktail.strMeasure4}
         </p>
       )}
       <h2>METHOD</h2>

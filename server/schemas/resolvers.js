@@ -40,7 +40,6 @@ const resolvers = {
       return { token, user };
     },
     saveCocktail: async (_, args, context) => {
-      console.log("args", args);
       const {
         idDrink,
         strDrink,
@@ -62,10 +61,35 @@ const resolvers = {
           { cocktail: args.cocktail },
           { new: true }
         );
-        console.log("updatedUser", updatedUser);
-        console.log("args.cocktail", args.cocktail);
         return updatedUser;
       }
+    },
+
+    removeCocktail: async (_, args, context) => {
+      const {
+        idDrink,
+        strDrink,
+        strIngredient1,
+        strIngredient2,
+        strIngredient3,
+        strIngredient4,
+        strMeasure1,
+        strMeasure2,
+        strMeasure3,
+        strMeasure4,
+        strInstructions,
+        strDrinkThumb,
+      } = args.cocktail;
+
+      if (context.user) {
+        const updatedUser = await User.findOneAndUpdate(
+          { _id: context.user._id },
+          { $pull: { cocktail: args.cocktail.idDrink } },
+          { new: true }
+        );
+        return updatedUser;
+      }
+      throw new AuthenticationError("You need to be logged in");
     },
   },
 };

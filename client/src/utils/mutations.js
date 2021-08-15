@@ -43,3 +43,24 @@ export const SAVE_COCKTAIL = gql`
     }
   }
 `;
+
+export const REMOVE_COCKTAIL = gql`
+  mutation removeCocktail($idDrink: String) {
+    removeCocktail(idDrink: $idDrink) {
+      cocktail {
+        idDrink
+        strDrink
+        strIngredient1
+        strIngredient2
+        strIngredient3
+        strIngredient4
+        strMeasure1
+        strMeasure2
+        strMeasure3
+        strMeasure4
+        strInstructions
+        strDrinkThumb
+      }
+    }
+  }
+`;

@@ -42,11 +42,6 @@ export default function SignUpForm() {
     });
   };
 
-  // TODO: Error handling
-  const [formErrorMessage, setFormErrorMessage] = useState(false);
-
-  function errorMessageDisplay() {}
-
   return (
     <div id="container">
       <h1>SIGN UP </h1>

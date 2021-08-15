@@ -46,6 +46,19 @@ h2 {
   border: 2px solid rgb(255, 255, 255);
   z-index: 1;
 }
+.viewSavedCocktailButton {
+  float: right;
+  margin-right: 13%;
+  padding: 10px 25px;
+  font-weight: 500;
+  background: black;
+  outline: none !important;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: white !important;
+  border: 2px solid rgb(255, 255, 255);
+  z-index: 1;
+}
 
 .buttonStyle {
   float: right;

@@ -7,7 +7,7 @@ export default function SavedCocktail() {
   // Query to get user data
   const { loading, data } = useQuery(GET_ME);
 
-  // const [deleteCocktail, { error }] = useMutation(REMOVE_COCKTAIL);
+  const [deleteCocktail, { error }] = useMutation(REMOVE_COCKTAIL);
 
   // Message when page is loading API data
   if (loading) {
@@ -25,13 +25,12 @@ export default function SavedCocktail() {
   const quantity4 = data.me.cocktail.strMeasure4;
   const instructions = data.me.cocktail.strInstructions;
   const drinkImage = data.me.cocktail.strDrinkThumb;
-  const drinkId = data.me.cocktail.idDrink;
 
   // TODO: Delete cocktail function
   // const handleDeleteCocktail = async () => {
   //   try {
   //     const { data } = await deleteCocktail({
-  //       variables: drinkId,
+  //       variables: "",
   //     });
   //   } catch (err) {
   //     console.error(err);

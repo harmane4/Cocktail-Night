@@ -12,7 +12,6 @@ import LoginForm from "./components/pages/LoginForm";
 import SignUpForm from "./components/pages/SignUpForm";
 import Home from "./components/pages/Home";
 import NavBar from "./components/NavBar";
-import Footer from "./components/Footer";
 import CocktailChoices from "./components/pages/CocktailChoices";
 import SavedCocktail from "./components/pages/SavedCocktail";
 require("dotenv").config();
@@ -51,7 +50,6 @@ function App() {
           <Route exact path="/saved" component={SavedCocktail} />
         </>
       </Router>
-      <Footer />
     </ApolloProvider>
   );
 }

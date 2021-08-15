@@ -66,25 +66,10 @@ const resolvers = {
     },
 
     removeCocktail: async (_, args, context) => {
-      const {
-        idDrink,
-        strDrink,
-        strIngredient1,
-        strIngredient2,
-        strIngredient3,
-        strIngredient4,
-        strMeasure1,
-        strMeasure2,
-        strMeasure3,
-        strMeasure4,
-        strInstructions,
-        strDrinkThumb,
-      } = args.cocktail;
-
       if (context.user) {
         const updatedUser = await User.findOneAndUpdate(
           { _id: context.user._id },
-          { $pull: { cocktail: args.cocktail.idDrink } },
+          { cocktail: { idDrink: args.idDrink } },
           { new: true }
         );
         return updatedUser;

@@ -40,6 +40,10 @@ export default function CocktailChoices() {
     setSubmitButtonMessage("Cocktail Saved!");
   }
 
+  function viewSavedCocktail() {
+    window.location.assign("/saved");
+  }
+
   useEffect(() => {
     randomCocktail();
   }, []);
@@ -96,6 +100,7 @@ export default function CocktailChoices() {
       </button>
 
       <h2>COCKTAIL</h2>
+
       <p className="submitButtonMessage">{submitButtonMessage}</p>
       {loading ? (
         <div>..loading</div>
@@ -111,6 +116,7 @@ export default function CocktailChoices() {
           alt={cocktail.strDrink}
         ></img>
       )}
+
       <h2>INGREDIENTS </h2>
       {loading ? (
         <div>..loading</div>
@@ -146,6 +152,9 @@ export default function CocktailChoices() {
       ) : (
         <p className="cocktailInfo">{cocktail.strInstructions}</p>
       )}
+      <button onClick={viewSavedCocktail} className="viewSavedCocktailButton">
+        View Saved Cocktail
+      </button>
     </div>
   );
 }

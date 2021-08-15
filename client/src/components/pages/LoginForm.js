@@ -6,8 +6,6 @@ import "./LoginForm.css";
 import Auth from "../../utils/auth";
 import { LOGIN_USER } from "../../utils/mutations";
 
-// TODO: Error handling
-
 export default function LoginForm() {
   // set initial form state
   const [userFormData, setUserFormData] = useState({

@@ -2,7 +2,7 @@ body {
   margin: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: linear-gradient(110deg, black 60%, #e87194 60%) !important;
+  background: linear-gradient(110deg, #1b1c1e 60%, #e87194 60%) !important;
   font-family: "Hind Siliguri", sans-serif;
 }
 
